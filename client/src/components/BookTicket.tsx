@@ -15,30 +15,38 @@ interface Event {
     organizer_email: string;
 }
 
-function BookTicket() {
-    const { eventId } = useParams(); // Get the event ID from the URL
-    const navigate = useNavigate();
+interface ApiError {
+    message: string;
+    error?: any;
+}
 
-    const [event, setEvent] = useState<Event | null>(null);   // Set event type to Event or null
+function BookTicket() {
+    const { eventId } = useParams();
+    const navigate = useNavigate();
+    const [event, setEvent] = useState<Event | null>(null);
+    const [error, setError] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const [formData, setFormData] = useState({
-        customer_name: '',
-        customer_email: '',
-        customer_phone: '',
+        attendee_name: '',
+        attendee_email: '',
+        attendee_phone: '',
         number_of_tickets: 1,
         booking_status: 'confirmed',
         payment_status: 'pending',
     });
 
-    // Fetch event details using eventId
     useEffect(() => {
         async function fetchEvent() {
             try {
                 const response = await fetch(`http://localhost:5000/api/events/${eventId}`);
-                if (response.ok) {
-                    const data = await response.json();
-                    setEvent(data);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch event: ${response.statusText}`);
                 }
+                const data = await response.json();
+                setEvent(data);
             } catch (error) {
+                setError('Failed to load event details. Please try again later.');
                 console.error('Error fetching event details:', error);
             }
         }
@@ -54,87 +62,141 @@ function BookTicket() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!event) return;
+        setIsSubmitting(true);
+        setError(null);
 
-        // Safeguard: Prevent booking if no tickets are available
-        if (event.available_tickets <= 0) {
-            alert('No tickets available for this event.');
+        if (!event) {
+            setError('Event not found');
+            setIsSubmitting(false);
             return;
         }
 
         try {
-            // Save booking information in the tickets collection
-            const bookingResponse = await fetch('http://localhost:5000/api/tickets', {
+            const ticketData = {
+                ...formData,
+                event_id: eventId,
+                booking_date: new Date().toISOString()
+            };
+
+            const response = await fetch('http://localhost:5000/api/tickets', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ ...formData, event_id: eventId, booking_date: new Date().toISOString() }),
+                body: JSON.stringify(ticketData),
             });
 
-            if (!bookingResponse.ok) {
-                throw new Error('Booking failed');
+            const data = await response.json() as ApiError;
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Failed to book tickets');
             }
 
-            // Update the number of available tickets in the events collection
-            await fetch(`http://localhost:5000/api/events/${eventId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    available_tickets: event.available_tickets - formData.number_of_tickets,
-                }),
-            });
-
-            alert('Booking confirmed!');
+            alert('Booking successful!');
             navigate('/');
-        } catch (error) {
-            console.error('Booking failed:', error);
-            alert('Booking failed.');
+        } catch (err) {
+            const errorMessage = err instanceof Error ? err.message : 'An unexpected error occurred';
+            setError(errorMessage);
+            console.error('Booking error:', err);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
+    if (error) {
+        return (
+            <div className="container mt-4">
+                <div className="alert alert-danger" role="alert">
+                    <h4 className="alert-heading">Booking Failed</h4>
+                    <p>{error}</p>
+                    <hr />
+                    <div className="d-flex justify-content-between align-items-center">
+                        <button
+                            className="btn btn-primary"
+                            onClick={() => setError(null)}
+                        >
+                            Try Again
+                        </button>
+                        <button
+                            className="btn btn-outline-secondary"
+                            onClick={() => navigate('/')}
+                        >
+                            Return Home
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className="container">
+        <div className="container mt-4">
             <h2>Book Tickets for {event?.event_name}</h2>
+            {event && (
+                <div className="card mb-4">
+                    <div className="card-body">
+                        <p className="mb-2">Available Tickets: {event.available_tickets}</p>
+                        <p className="mb-0">Price per Ticket: ${event.ticket_price}</p>
+                    </div>
+                </div>
+            )}
             <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="customer_name"
-                    placeholder="Your Name"
-                    value={formData.customer_name}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    type="email"
-                    name="customer_email"
-                    placeholder="Your Email"
-                    value={formData.customer_email}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    type="tel"
-                    name="customer_phone"
-                    placeholder="Phone Number"
-                    value={formData.customer_phone}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    type="number"
-                    name="number_of_tickets"
-                    placeholder="Number of Tickets"
-                    value={formData.number_of_tickets}
-                    onChange={handleChange}
-                    required
-                    min="1"
-                    max={event?.available_tickets || 1}
-                />
-                <button type="submit" className="btn btn-primary">
-                    Confirm Booking
+                <div className="mb-3">
+                    <input
+                        type="text"
+                        name="attendee_name"
+                        placeholder="Your Name"
+                        value={formData.attendee_name}
+                        onChange={handleChange}
+                        className="form-control"
+                        required
+                        disabled={isSubmitting}
+                    />
+                </div>
+                <div className="mb-3">
+                    <input
+                        type="email"
+                        name="attendee_email"
+                        placeholder="Your Email"
+                        value={formData.attendee_email}
+                        onChange={handleChange}
+                        className="form-control"
+                        required
+                        disabled={isSubmitting}
+                    />
+                </div>
+                <div className="mb-3">
+                    <input
+                        type="tel"
+                        name="attendee_phone"
+                        placeholder="Phone Number"
+                        value={formData.attendee_phone}
+                        onChange={handleChange}
+                        className="form-control"
+                        required
+                        disabled={isSubmitting}
+                    />
+                </div>
+                <div className="mb-3">
+                    <input
+                        type="number"
+                        name="number_of_tickets"
+                        placeholder="Number of Tickets"
+                        value={formData.number_of_tickets}
+                        onChange={handleChange}
+                        className="form-control"
+                        required
+                        min="1"
+                        max={event?.available_tickets || 1}
+                        disabled={isSubmitting}
+                    />
+                </div>
+                <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={isSubmitting || !event?.available_tickets}
+                >
+                    {isSubmitting ? 'Processing...' : 'Confirm Booking'}
                 </button>
             </form>
         </div>

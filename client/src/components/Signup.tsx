@@ -6,6 +6,8 @@ interface SignupProps {
 }
 
 function Signup({ onLogin }: SignupProps) {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [userType, setUserType] = useState<'organizer' | 'attendee'>('attendee');
@@ -13,6 +15,8 @@ function Signup({ onLogin }: SignupProps) {
     const handleSignup = async (e: React.FormEvent) => {
         e.preventDefault();
         const signupData = {
+            firstName,
+            lastName,
             email,
             password,
             userType,
@@ -43,6 +47,36 @@ function Signup({ onLogin }: SignupProps) {
         <div className="container mt-5">
             <h2 className="text-center mb-4">Sign Up</h2>
             <form onSubmit={handleSignup} className="w-50 mx-auto">
+                <div className="row mb-3">
+                    <div className="col">
+                        <label htmlFor="firstName" className="form-label">
+                            First Name
+                        </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="firstName"
+                            placeholder="Enter first name"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="col">
+                        <label htmlFor="lastName" className="form-label">
+                            Last Name
+                        </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="lastName"
+                            placeholder="Enter last name"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            required
+                        />
+                    </div>
+                </div>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">
                         Email address

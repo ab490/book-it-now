@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
-// Define user schema
 const UserSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true }, // Email is unique
+  firstName: { type: String, required: true, trim: true },
+  lastName: { type: String, required: true, trim: true },
+  email: { type: String, required: true, unique: true, lowercase: true }, 
   password: { type: String, required: true },
-  userType: { type: String, enum: ['organizer', 'attendee'], required: true } // Organizer or attendee
+  userType: { type: String, enum: ['organizer', 'attendee'], required: true } 
 });
 
 const User = mongoose.model('User', UserSchema);
