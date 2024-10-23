@@ -59,31 +59,6 @@ function CreateEvent() {
     }
   };
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await fetch('http://localhost:5000/api/events', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(eventData),
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error('Event creation failed');
-  //     }
-
-  //     alert('Event created successfully!');
-
-  //     // Redirect back to the main page after event creation
-  //     navigate('/');
-  //   } catch (error) {
-  //     console.error('Event creation failed', error);
-  //     alert('Event creation failed');
-  //   }
-  // };
-
   return (
     <div className="container">
       <h2>Create Event</h2>

@@ -144,6 +144,7 @@ function App() {
             <th>Available Tickets</th>
             <th>Organizer Name</th>
             <th>Organizer Email</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -160,6 +161,17 @@ function App() {
                 <td>{event.available_tickets}</td>
                 <td>{event.organizer_name}</td>
                 <td>{event.organizer_email}</td>
+                {userType === 'attendee' && (
+                  <td>
+                    <button
+                      className={`btn ${event.available_tickets === 0 ? 'btn-secondary' : 'btn-success'}`}
+                      disabled={event.available_tickets === 0}
+                      onClick={() => navigate(`/book-ticket/${event._id}`)}
+                    >
+                      {event.available_tickets === 0 ? 'Sold Out' : 'Book Ticket'}
+                    </button>
+                  </td>
+                )}
               </tr>
             ))
           ) : (
