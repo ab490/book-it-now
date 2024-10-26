@@ -2,7 +2,7 @@ import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface SignupProps {
-    onLogin: (userType: 'organizer' | 'attendee') => void;
+    onLogin: (userType: 'organizer' | 'attendee', user: { firstName: string, email: string, phone: string }) => void;
 }
 
 function Signup({ onLogin }: SignupProps) {
@@ -10,6 +10,7 @@ function Signup({ onLogin }: SignupProps) {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [phone, setPhone] = useState('');
     const [userType, setUserType] = useState<'organizer' | 'attendee'>('attendee');
 
     const handleSignup = async (e: React.FormEvent) => {
@@ -19,6 +20,7 @@ function Signup({ onLogin }: SignupProps) {
             lastName,
             email,
             password,
+            phone,
             userType,
         };
 
@@ -34,7 +36,7 @@ function Signup({ onLogin }: SignupProps) {
             if (response.ok) {
                 const data = await response.json();
                 console.log('User signed up:', data);
-                onLogin(userType);
+                onLogin(userType, { firstName: data.firstName, email: data.email, phone: data.phone });
             } else {
                 alert('Signup failed');
             }
@@ -102,6 +104,20 @@ function Signup({ onLogin }: SignupProps) {
                         placeholder="Enter password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="phone" className="form-label">
+                        Phone Number
+                    </label>
+                    <input
+                        type="tel"
+                        className="form-control"
+                        id="phone"
+                        placeholder="Enter phone number"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
                         required
                     />
                 </div>

@@ -26,6 +26,7 @@ function BookTicket() {
     const [event, setEvent] = useState<Event | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     const [formData, setFormData] = useState({
         attendee_name: '',
@@ -45,6 +46,7 @@ function BookTicket() {
                 }
                 const data = await response.json();
                 setEvent(data);
+                setTotalPrice(data.ticket_price * formData.number_of_tickets);
             } catch (error) {
                 setError('Failed to load event details. Please try again later.');
                 console.error('Error fetching event details:', error);
@@ -52,6 +54,12 @@ function BookTicket() {
         }
         fetchEvent();
     }, [eventId]);
+
+    useEffect(() => {
+        if (event) {
+            setTotalPrice(event.ticket_price * formData.number_of_tickets);
+        }
+    }, [formData.number_of_tickets, event]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
@@ -75,7 +83,7 @@ function BookTicket() {
             const ticketData = {
                 ...formData,
                 event_id: eventId,
-                booking_date: new Date().toISOString()
+                total_price: totalPrice
             };
 
             const response = await fetch('http://localhost:5000/api/tickets', {
@@ -131,12 +139,14 @@ function BookTicket() {
 
     return (
         <div className="container mt-4">
+
             <h2>Book Tickets for {event?.event_name}</h2>
             {event && (
                 <div className="card mb-4">
                     <div className="card-body">
                         <p className="mb-2">Available Tickets: {event.available_tickets}</p>
                         <p className="mb-0">Price per Ticket: ${event.ticket_price}</p>
+                        <p className="mt-2"><strong>Total Price:</strong> ${totalPrice}</p> {/* Total price displayed */}
                     </div>
                 </div>
             )}
@@ -178,6 +188,9 @@ function BookTicket() {
                     />
                 </div>
                 <div className="mb-3">
+                    <label htmlFor="number_of_tickets" className="form-label">
+                        Number of Tickets
+                    </label>
                     <input
                         type="number"
                         name="number_of_tickets"

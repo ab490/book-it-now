@@ -4,7 +4,7 @@ const User = require('../models/User');
 
 
 router.post('/signup', async (req, res) => {
-  const { firstName, lastName, email, password, userType } = req.body;
+  const { firstName, lastName, email, password, phone, userType } = req.body;
   
   try {
     const existingUser = await User.findOne({ email });
@@ -12,7 +12,7 @@ router.post('/signup', async (req, res) => {
       return res.status(400).json({ message: 'Email already in use' });
     }
 
-    const newUser = new User({ firstName, lastName, email, password, userType });
+    const newUser = new User({ firstName, lastName, email, password, phone, userType });
     await newUser.save();
     
     res.status(201).json(newUser);

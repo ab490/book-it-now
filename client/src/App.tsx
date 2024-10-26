@@ -9,6 +9,7 @@ import './App.css';
 interface Event {
   _id: string;
   event_name: string;
+  description: string;
   date: string;
   start_time: string;
   end_time: string;
@@ -19,6 +20,11 @@ interface Event {
   organizer_name: string;
   organizer_email: string;
 }
+interface User {
+  firstName: string;
+  email: string;
+  phone: string;
+}
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -27,14 +33,16 @@ function App() {
   const [events, setEvents] = useState<Event[]>([]); // Updated to store events
   const [currentPage, setCurrentPage] = useState(1); // State to track current page
   const eventsPerPage = 10; // Limit to 10 events per page  
+  const [user, setUser] = useState<User | null>(null); // State to store user details
 
   const navigate = useNavigate(); // Initialize navigate for redirection
   const location = useLocation();
 
   // Handle login (marked as async because of await)
-  const handleLogin = async (type: 'organizer' | 'attendee') => {
+  const handleLogin = async (type: 'organizer' | 'attendee', user: { firstName: string, email: string, phone: string }) => {
     setIsLoggedIn(true);
     setUserType(type);
+    setUser(user);
     await fetchEvents(); // Fetch events after login/signup
   };
 
@@ -116,7 +124,7 @@ function App() {
   // Display events after successful login for both organizers and attendees
   return (
     <div className="App">
-      <h1>Welcome, {userType === 'organizer' ? 'Organizer' : 'Attendee'}</h1>
+      <h1>Welcome {userType.charAt(0).toUpperCase() + userType.slice(1)} {user?.firstName ? user.firstName : (userType === 'organizer' ? 'Organizer' : 'Attendee')}</h1>
 
       {userType === 'organizer' && (
         <>
@@ -130,11 +138,12 @@ function App() {
         </>
       )}
 
-      <h2>Available Events</h2>
+      <h2>Events</h2>
       <table className="table table-bordered">
         <thead>
           <tr>
             <th>Event Name</th>
+            <th>Description</th>
             <th>Date</th>
             <th>Start Time</th>
             <th>End Time</th>
@@ -144,7 +153,7 @@ function App() {
             <th>Available Tickets</th>
             <th>Organizer Name</th>
             <th>Organizer Email</th>
-            <th>Action</th>
+            {userType === 'attendee' && <th>Action</th>}
           </tr>
         </thead>
         <tbody>
@@ -152,6 +161,7 @@ function App() {
             currentEvents.map((event) => (
               <tr key={event._id}>
                 <td>{event.event_name}</td>
+                <td>{event.description}</td>
                 <td>{event.date}</td>
                 <td>{event.start_time}</td>
                 <td>{event.end_time}</td>

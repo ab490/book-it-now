@@ -2,7 +2,7 @@ import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface LoginProps {
-    onLogin: (userType: 'organizer' | 'attendee') => void;
+    onLogin: (userType: 'organizer' | 'attendee', user: { firstName: string, email: string, phone: string }) => void;
 }
 
 function Login({ onLogin }: LoginProps) {
@@ -24,7 +24,7 @@ function Login({ onLogin }: LoginProps) {
             if (response.ok) {
                 const data = await response.json();
                 console.log('User logged in:', data);
-                onLogin(data.userType); // Pass userType ('organizer' or 'attendee') back to parent
+                onLogin(data.userType, { firstName: data.firstName, email: data.email, phone: data.phone });
             } else {
                 alert('Login failed');
             }
