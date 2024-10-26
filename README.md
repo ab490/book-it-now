@@ -9,18 +9,18 @@ To setup the project in your local pc:
 
 1. clone the repo 
 
-2. install backend dependencies
-cd server
+2. install backend dependencies<br>
+cd server<br>
 npm install
 
-3. install frontend dependencies
-cd client
+3. install frontend dependencies<br>
+cd client<br>
 npm install
 
-4. start backend 
-cd server
+4. start backend<br>
+cd server<br>
 node server.js
 
-5. start frontend
-cd client
+5. start frontend<br>
+cd client<br>
 npm run dev
