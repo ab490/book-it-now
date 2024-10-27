@@ -47,12 +47,14 @@ function Signup({ onLogin }: SignupProps) {
 
     return (
         <div className="container mt-5">
-            <h2 className="text-center mb-4">Sign Up</h2>
+            {/* <h2 className="text-center mb-4">Sign Up</h2> */}
             <form onSubmit={handleSignup} className="w-50 mx-auto">
                 <div className="row mb-3">
                     <div className="col">
                         <label htmlFor="firstName" className="form-label">
-                            First Name
+                            <p style={{ color: '#e0e0e0', fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
+                                First Name
+                            </p>
                         </label>
                         <input
                             type="text"
@@ -66,7 +68,9 @@ function Signup({ onLogin }: SignupProps) {
                     </div>
                     <div className="col">
                         <label htmlFor="lastName" className="form-label">
-                            Last Name
+                            <p style={{ color: '#e0e0e0', fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
+                                Last Name
+                            </p>
                         </label>
                         <input
                             type="text"
@@ -81,7 +85,9 @@ function Signup({ onLogin }: SignupProps) {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">
-                        Email address
+                        <p style={{ color: '#e0e0e0', fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
+                            Email address
+                        </p>
                     </label>
                     <input
                         type="email"
@@ -95,7 +101,9 @@ function Signup({ onLogin }: SignupProps) {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="password" className="form-label">
-                        Password
+                        <p style={{ color: '#e0e0e0', fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
+                            Password
+                        </p>
                     </label>
                     <input
                         type="password"
@@ -109,7 +117,9 @@ function Signup({ onLogin }: SignupProps) {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="phone" className="form-label">
-                        Phone Number
+                        <p style={{ color: '#e0e0e0', fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
+                            Phone Number
+                        </p>
                     </label>
                     <input
                         type="tel"
@@ -123,7 +133,9 @@ function Signup({ onLogin }: SignupProps) {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="userType" className="form-label">
-                        Role
+                        <p style={{ color: '#e0e0e0', fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
+                            Role
+                        </p>
                     </label>
                     <select
                         id="userType"

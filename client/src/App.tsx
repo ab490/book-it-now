@@ -95,12 +95,13 @@ function App() {
   if (!isLoggedIn) {
     return (
       <div className="App">
-        <h1 className="text-center my-4">BookItNow - Event Booking System</h1>
+        <h1 className="text-center my-4">BookItNow - Events Just a Click Away!</h1>
+
         {!isSignup ? (
           <>
             <Login onLogin={handleLogin} />
             <div className="text-center mt-3">
-              <p>New user?</p>
+              <p style={{ color: '#e0e0e0' }}>New user?</p>
               <button className="btn btn-link" onClick={toggleSignup}>
                 Sign Up
               </button>
@@ -110,7 +111,7 @@ function App() {
           <>
             <Signup onLogin={handleLogin} />
             <div className="text-center mt-3">
-              <p>Already have an account?</p>
+              <p style={{ color: '#e0e0e0' }}>Already have an account?</p>
               <button className="btn btn-link" onClick={toggleSignup}>
                 Log In
               </button>
@@ -138,7 +139,7 @@ function App() {
         </>
       )}
 
-      <h2>Events</h2>
+      <h2 style={{ marginTop: '0.1em' }}>Events</h2>
       <table className="table table-bordered">
         <thead>
           <tr>
@@ -206,7 +207,7 @@ function App() {
           ))}
         </ul>
       </nav>
-    </div>
+    </div >
   );
 }
 

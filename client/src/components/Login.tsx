@@ -35,11 +35,12 @@ function Login({ onLogin }: LoginProps) {
 
     return (
         <div className="container mt-5">
-            <h2 className="text-center mb-4">Login</h2>
             <form onSubmit={handleLogin} className="w-50 mx-auto">
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">
-                        Email address
+                        <p style={{ color: '#e0e0e0', fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
+                            Email address
+                        </p>
                     </label>
                     <input
                         type="email"
@@ -53,7 +54,9 @@ function Login({ onLogin }: LoginProps) {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="password" className="form-label">
-                        Password
+                        <p style={{ color: '#e0e0e0', fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
+                            Password
+                        </p>
                     </label>
                     <input
                         type="password"

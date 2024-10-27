@@ -28,15 +28,34 @@ function ViewEvents() {
     }, []);
 
     return (
-        <div>
+        <div className="table-container">
             <h2>Available Events</h2>
-            <ul>
-                {events.map((event) => (
-                    <li key={event._id}>
-                        {event.event_name} - {event.date} - {event.location}
-                    </li>
-                ))}
-            </ul>
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Date</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {events.length > 0 ? (
+                        events.map((event) => (
+                            <tr key={event._id}>
+                                <td>{event.event_name}</td>
+                                <td>{event.date}</td>
+                                <td>{event.location}</td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan={3} className="text-center">
+                                No events available
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
         </div>
     );
 }
