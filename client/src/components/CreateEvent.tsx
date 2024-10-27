@@ -84,6 +84,7 @@ function CreateEvent() {
         <form onSubmit={handleSubmit} className="space-y-6">
 
 
+
           {/* Organizer Details */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -273,25 +274,23 @@ function CreateEvent() {
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-end space-x-4 mt-8">
+          <div className="flex gap-4 justify-end mt-6">
             <button
               type="button"
-              onClick={() => navigate('/')}
-              className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+              className="px-6 py-2 border rounded-md hover:border-blue-500 transition-colors"
             >
               Cancel
             </button>
-
             <button
               type="submit"
               disabled={loading}
-              className={`px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 
-                ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`px-6 py-2 border rounded-md hover:border-blue-500 transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
             >
               {loading ? 'Creating...' : 'Create Event'}
             </button>
-
           </div>
+
         </form>
       </div>
     </div>
