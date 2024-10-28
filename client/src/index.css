@@ -113,6 +113,11 @@ button:focus-visible {
   }
 }
 
+.label-spacing {
+  margin-right: 1rem;
+}
+
+
 .table-container {
   margin: 0 auto;
   max-width: 90%;

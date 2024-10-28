@@ -131,7 +131,7 @@ function App() {
         <>
           {/* Register Event Button */}
           <button
-            className="btn btn-primary my-4"
+            className="btn btn-primary mb-3"
             onClick={() => navigate('/register-event')} // Navigate to the event registration page
           >
             Register Event

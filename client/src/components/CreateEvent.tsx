@@ -79,12 +79,12 @@ function CreateEvent() {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="translucent-container p-8 bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg">
-        <h2 className="text-3xl font-bold text-white text-center mb-6">Register Your Event</h2>
+        <h2 style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)' }} className="text-3xl font-bold text-white text-center">Register Your Event</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Organizer Details */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
             <div className="mb-4">
-              <label className="block text-white text-sm font-medium mb-2 mr-12">Name</label>
+              <label className="block text-white text-sm font-medium mb-2 label-spacing">Name</label>
               <input
                 type="text"
                 name="organizer_name"
@@ -96,7 +96,7 @@ function CreateEvent() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-white text-sm font-medium mb-2">
+              <label className="block text-white text-sm font-medium mb-2 label-spacing">
                 Email
               </label>
               <input
@@ -114,7 +114,7 @@ function CreateEvent() {
           {/* Basic Event Details */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
             <div className="mb-4">
-              <label className="block text-white text-sm font-medium mb-2">
+              <label className="block text-white text-sm font-medium mb-2 label-spacing">
                 Event Name
               </label>
               <input
@@ -136,7 +136,7 @@ function CreateEvent() {
           {/* Date and Time */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
             <div className="mb-4">
-              <label className="block text-white text-sm font-medium mb-2">
+              <label className="block text-white text-sm font-medium mb-2 label-spacing">
                 Date
               </label>
               <input
@@ -149,7 +149,7 @@ function CreateEvent() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-white text-sm font-medium mb-2">
+              <label className="block text-white text-sm font-medium mb-2 label-spacing">
                 Start Time
               </label>
               <input
@@ -162,7 +162,7 @@ function CreateEvent() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-white text-sm font-medium mb-2">
+              <label className="block text-white text-sm font-medium mb-2 label-spacing">
                 End Time
               </label>
               <input
@@ -181,7 +181,7 @@ function CreateEvent() {
 
           {/* Location */}
           <div className="mb-4">
-            <label className="block text-white text-sm font-medium mb-2">
+            <label className="block text-white text-sm font-medium mb-2 label-spacing">
               Location
             </label>
             <input
@@ -197,7 +197,7 @@ function CreateEvent() {
 
           {/* Description */}
           <div className="mb-4">
-            <label className="block text-white text-sm font-medium mb-2">
+            <label className="block text-white text-sm font-medium mb-2 label-spacing">
               Event Description
             </label>
             <textarea
@@ -214,7 +214,7 @@ function CreateEvent() {
           {/* Ticket Information */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
             <div className="mb-4">
-              <label className="block text-white text-sm font-medium mb-2">
+              <label className="block text-white text-sm font-medium mb-2 label-spacing">
                 Ticket Type
               </label>
               <select
@@ -231,7 +231,7 @@ function CreateEvent() {
               </select>
             </div>
             <div className="mb-4">
-              <label className="block text-white text-sm font-medium mb-2">
+              <label className="block text-white text-sm font-medium mb-2 label-spacing">
                 Ticket Price ($)
               </label>
               <input
@@ -245,7 +245,7 @@ function CreateEvent() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-white text-sm font-medium mb-2">
+              <label className="block text-white text-sm font-medium mb-2 label-spacing">
                 Available Tickets
               </label>
               <input
@@ -261,10 +261,11 @@ function CreateEvent() {
           </div>
 
           {/* Submit Button */}
-          <div className="flex gap-4 justify-end mt-8">
+          <div className="flex justify-end mt-8">
             <button
               type="button"
               className="px-6 py-2 border rounded-md hover:border-blue-500 transition-colors"
+              style={{ marginRight: '18px' }}
             >
               Cancel
             </button>
