@@ -38,6 +38,19 @@ function App() {
   const navigate = useNavigate(); // Initialize navigate for redirection
   const location = useLocation();
 
+  // Add handleLogout function
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUserType('');
+    setUser(null);
+    setEvents([]);
+    setCurrentPage(1);
+    // Optional: Clear any stored tokens or session data
+    localStorage.clear();
+    // Navigate back to login page
+    navigate('/');
+  };
+
   // Handle login (marked as async because of await)
   const handleLogin = async (type: 'organizer' | 'attendee', user: { firstName: string, email: string, phone: string }) => {
     setIsLoggedIn(true);
@@ -125,7 +138,21 @@ function App() {
   // Display events after successful login for both organizers and attendees
   return (
     <div className="App">
-      <h1>Welcome {userType.charAt(0).toUpperCase() + userType.slice(1)} {user?.firstName ? user.firstName : (userType === 'organizer' ? 'Organizer' : 'Attendee')}</h1>
+      <div className="position-relative mb-4">
+        <h1 className="text-center">Welcome {userType.charAt(0).toUpperCase() + userType.slice(1)} {user?.firstName ? user.firstName : (userType === 'organizer' ? 'Organizer' : 'Attendee')}</h1>
+        <button
+          className="btn btn-danger btn-sm position-absolute"
+          onClick={handleLogout}
+          style={{
+            top: '10px',
+            right: '10px',
+            padding: '0.25rem 0.5rem',
+            fontSize: '0.875rem'
+          }}
+        >
+          Logout
+        </button>
+      </div>
 
       {userType === 'organizer' && (
         <>

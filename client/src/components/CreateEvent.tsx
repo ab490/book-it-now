@@ -266,6 +266,7 @@ function CreateEvent() {
               type="button"
               className="px-6 py-2 border rounded-md hover:border-blue-500 transition-colors"
               style={{ marginRight: '18px' }}
+              onClick={() => navigate(-1)}
             >
               Cancel
             </button>

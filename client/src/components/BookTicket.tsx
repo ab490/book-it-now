@@ -157,7 +157,7 @@ function BookTicket() {
                         placeholder="Your Name"
                         value={formData.attendee_name}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 label-spacing"
                         required
                         disabled={isSubmitting}
                     />
@@ -167,7 +167,7 @@ function BookTicket() {
                         placeholder="Your Email"
                         value={formData.attendee_email}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 label-spacing"
                         required
                         disabled={isSubmitting}
                     />
@@ -198,6 +198,14 @@ function BookTicket() {
                             disabled={isSubmitting}
                         />
                     </div>
+                    <button
+                        type="button"
+                        className="px-4 py-3 border rounded-md hover:border-blue-500 transition-colors"
+                        style={{ marginRight: '18px' }}
+                        onClick={() => navigate(-1)}
+                    >
+                        Cancel
+                    </button>
                     <button
                         type="submit"
                         className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transition-all duration-200 shadow-lg hover:shadow-xl"
