@@ -1,7 +1,8 @@
 // To connect to the MongoDB database
 import mongoose from 'mongoose';
+require('dotenv').config();
 
-const uri = "mongodb+srv://anobajaj:mKKmFb5ISXB6Gmc4@bookitnow.onfe9.mongodb.net/";
+const uri = process.env.MONGODB_URI;
 
 mongoose.connect(uri)
   .then(() => console.log('Connected to MongoDB'))
