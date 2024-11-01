@@ -1,3 +1,4 @@
+// To define the structures of different documents in MongoDB
 const eventSchema = new mongoose.Schema({
   event_name: { type: String, required: true },
   date: { type: Date, required: true },

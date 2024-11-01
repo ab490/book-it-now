@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose'); // Add this import
+const mongoose = require('mongoose'); 
 const Ticket = require('../models/Ticket');
 const Event = require('../models/Event');
 
@@ -9,12 +9,10 @@ router.post('/', async (req, res) => {
     console.log("Received ticket booking request:", ticketData);
 
     try {
-        // Use a database transaction to ensure data consistency
         const session = await mongoose.startSession();
         session.startTransaction();
 
         try {
-            // Find the event and lock it for update
             const event = await Event.findById(ticketData.event_id).session(session);
             
             if (!event) {
@@ -29,15 +27,13 @@ router.post('/', async (req, res) => {
                 });
             }
 
-            // Create new ticket
             const newTicket = new Ticket(ticketData);
             await newTicket.save({ session });
 
-            // Update event tickets
+            // Updating event tickets to be reduced by the number of tickets bought
             event.available_tickets -= ticketData.number_of_tickets;
             await event.save({ session });
 
-            // Commit the transaction
             await session.commitTransaction();
             
             res.status(201).json({
@@ -47,7 +43,6 @@ router.post('/', async (req, res) => {
             });
 
         } catch (error) {
-            // If anything fails, abort the transaction
             await session.abortTransaction();
             throw error;
         } finally {

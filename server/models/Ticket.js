@@ -1,6 +1,6 @@
+// tickets collection in MongoDB
 const mongoose = require('mongoose');
 
-// Define ticket schema
 const TicketSchema = new mongoose.Schema({
   event_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Event', required: true },
   attendee_name: { type: String, required: true },

@@ -1,14 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors'); // Import CORS
+const cors = require('cors'); 
 
 const app = express();
 
-// Middleware
-app.use(express.json()); // Parse incoming JSON requests
-app.use(cors()); // Allow requests from frontend (e.g., Vite)
+app.use(express.json()); 
+app.use(cors()); 
 
-// Connect to MongoDB (ensure you're connecting to both events and tickets DB)
+// Connecting to MongoDB
 mongoose.connect('mongodb+srv://anobajaj:mKKmFb5ISXB6Gmc4@bookitnow.onfe9.mongodb.net/event_booking')
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));

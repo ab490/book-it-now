@@ -1,6 +1,6 @@
+// events collection in MongoDB
 const mongoose = require('mongoose');
 
-// Define event schema
 const EventSchema = new mongoose.Schema({
   event_name: { type: String, required: true },
   description: { type: String, required: true },
