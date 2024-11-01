@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Signup from './components/Signup';
 import Login from './components/Login';
-import { BrowserRouter as Router, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -29,10 +29,10 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState<'organizer' | 'attendee' | ''>('');
   const [isSignup, setIsSignup] = useState(false);
-  const [events, setEvents] = useState<Event[]>([]); 
+  const [events, setEvents] = useState<Event[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const eventsPerPage = 10;
-  const [user, setUser] = useState<User | null>(null); 
+  const [user, setUser] = useState<User | null>(null);
 
   const navigate = useNavigate();
   const location = useLocation();
