@@ -47,7 +47,6 @@ function Signup({ onLogin }: SignupProps) {
 
     return (
         <div className="container mt-5">
-            {/* <h2 className="text-center mb-4">Sign Up</h2> */}
             <form onSubmit={handleSignup} className="w-50 mx-auto">
                 <div className="row mb-3">
                     <div className="col">

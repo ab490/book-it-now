@@ -5,7 +5,6 @@ import { BrowserRouter as Router, useNavigate, useLocation } from 'react-router-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-// Define the type for an event
 interface Event {
   _id: string;
   event_name: string;
@@ -30,47 +29,41 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState<'organizer' | 'attendee' | ''>('');
   const [isSignup, setIsSignup] = useState(false);
-  const [events, setEvents] = useState<Event[]>([]); // Updated to store events
-  const [currentPage, setCurrentPage] = useState(1); // State to track current page
-  const eventsPerPage = 10; // Limit to 10 events per page  
-  const [user, setUser] = useState<User | null>(null); // State to store user details
+  const [events, setEvents] = useState<Event[]>([]); 
+  const [currentPage, setCurrentPage] = useState(1);
+  const eventsPerPage = 10;
+  const [user, setUser] = useState<User | null>(null); 
 
-  const navigate = useNavigate(); // Initialize navigate for redirection
+  const navigate = useNavigate();
   const location = useLocation();
 
-  // Add handleLogout function
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUserType('');
     setUser(null);
     setEvents([]);
     setCurrentPage(1);
-    // Optional: Clear any stored tokens or session data
     localStorage.clear();
-    // Navigate back to login page
     navigate('/');
   };
 
-  // Handle login (marked as async because of await)
   const handleLogin = async (type: 'organizer' | 'attendee', user: { firstName: string, email: string, phone: string }) => {
     setIsLoggedIn(true);
     setUserType(type);
     setUser(user);
-    await fetchEvents(); // Fetch events after login/signup
+    await fetchEvents();
   };
 
-  // Toggle between login and signup
   const toggleSignup = () => {
     setIsSignup((prev) => !prev);
   };
 
-  // Fetch events from backend
   const fetchEvents = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/events');
       if (response.ok) {
         const data = await response.json();
-        setEvents(data); // Store events in the state
+        setEvents(data);
       } else {
         console.error('Error fetching events');
       }
@@ -80,31 +73,25 @@ function App() {
   };
 
 
-  // Ensure events are fetched after login or when fetchEvents changes
   useEffect(() => {
     if (isLoggedIn) {
       fetchEvents();
     }
   }, [isLoggedIn, fetchEvents]);
 
-  // New useEffect to handle refresh state
   useEffect(() => {
     if (location.state && (location.state as any).refreshEvents) {
       fetchEvents();
-      // Clear the state to avoid unnecessary refreshes
       navigate(location.pathname, { replace: true, state: {} });
     }
   }, [location.state, navigate]);
 
-  // Get current events based on pagination
   const indexOfLastEvent = currentPage * eventsPerPage;
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
   const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
 
-  // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  // Show login/signup if not logged in
   if (!isLoggedIn) {
     return (
       <div className="App">
@@ -135,7 +122,6 @@ function App() {
     );
   }
 
-  // Display events after successful login for both organizers and attendees
   return (
     <div className="App">
       <div className="position-relative mb-4">
@@ -156,10 +142,9 @@ function App() {
 
       {userType === 'organizer' && (
         <>
-          {/* Register Event Button */}
           <button
             className="btn btn-primary mb-3"
-            onClick={() => navigate('/register-event')} // Navigate to the event registration page
+            onClick={() => navigate('/register-event')}
           >
             Register Event
           </button>
@@ -222,7 +207,6 @@ function App() {
         </tbody>
       </table>
 
-      {/* Pagination */}
       <nav>
         <ul className="pagination">
           {Array.from({ length: Math.ceil(events.length / eventsPerPage) }).map((_, index) => (
@@ -239,8 +223,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-

@@ -81,6 +81,7 @@ function CreateEvent() {
       <div className="translucent-container p-8 bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg">
         <h2 style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)' }} className="text-3xl font-bold text-white text-center">Register Your Event</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
+
           {/* Organizer Details */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
             <div className="mb-4">

@@ -11,7 +11,6 @@ function Login({ onLogin }: LoginProps) {
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Call your backend login API here
         try {
             const response = await fetch('http://localhost:5000/api/users/login', {
                 method: 'POST',

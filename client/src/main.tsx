@@ -13,8 +13,8 @@ createRoot(document.getElementById('root')!).render(
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/register-event" element={<CreateEvent />} /> {/* Route for event registration */}
-        <Route path="/book-ticket/:eventId" element={<BookTicket />} /> {/* Route for booking tickets */}
+        <Route path="/register-event" element={<CreateEvent />} /> {/* Route for Organizers - Event Registration */}
+        <Route path="/book-ticket/:eventId" element={<BookTicket />} /> {/* Route for Attendees - Booking Tickets */}
       </Routes>
     </Router>
   </StrictMode>

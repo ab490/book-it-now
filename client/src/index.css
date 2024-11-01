@@ -2,12 +2,8 @@
   font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  /* color-scheme: dark; */
   color: #ffffff;
   background-color: #1b1b1b;
-  /* color: rgba(255, 255, 255, 0.87);
-  background-color: transparent; */
-  /* Changed from #242424 to allow background image to show */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -30,11 +26,9 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  /* Add a dark overlay to improve text readability */
   position: relative;
 }
 
-/* Add an overlay to improve text readability */
 body::before {
   content: '';
   position: absolute;
@@ -43,11 +37,9 @@ body::before {
   bottom: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.5);
-  /* Adjust opacity as needed */
   z-index: 1;
 }
 
-/* Ensure content appears above the overlay */
 #root {
   position: relative;
   z-index: 2;
@@ -66,10 +58,8 @@ a:hover {
 h1 {
   font-size: 3em;
   color: #ffffff;
-  /* Changed to white */
   font-weight: 600;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  /* Keeps a shadow for better readability */
   margin-bottom: 0.5em;
 }
 
@@ -109,7 +99,6 @@ button:focus-visible {
 
   button.register-event {
     margin-bottom: 0.5em;
-    /* Reduce the space below the button */
   }
 }
 
