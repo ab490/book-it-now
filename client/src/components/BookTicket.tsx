@@ -138,80 +138,83 @@ function BookTicket() {
     }
 
     return (
-        <div className="container mt-4">
-
-            <h2>Book Tickets for {event?.event_name}</h2>
-            {event && (
-                <div className="card mb-4">
-                    <div className="card-body">
+        <div className="min-h-screen flex items-center justify-center">
+            <div className="translucent-container p-8 bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg">
+                <h2 style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)' }} className="text-3xl font-bold text-white text-center mb-6">
+                    Book Tickets for {event?.event_name}
+                </h2>
+                {event && (
+                    <div className="bg-white/20 p-4 mb-6 rounded-lg text-white">
                         <p className="mb-2">Available Tickets: {event.available_tickets}</p>
-                        <p className="mb-0">Price per Ticket: ${event.ticket_price}</p>
-                        <p className="mt-2"><strong>Total Price:</strong> ${totalPrice}</p> {/* Total price displayed */}
+                        <p className="mb-2">Price per Ticket: ${event.ticket_price}</p>
+                        <p className="font-semibold">Total Price: ${totalPrice}</p>
                     </div>
-                </div>
-            )}
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
+                )}
+                <form onSubmit={handleSubmit} className="space-y-4">
                     <input
                         type="text"
                         name="attendee_name"
                         placeholder="Your Name"
                         value={formData.attendee_name}
                         onChange={handleChange}
-                        className="form-control"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
                         required
                         disabled={isSubmitting}
                     />
-                </div>
-                <div className="mb-3">
                     <input
                         type="email"
                         name="attendee_email"
                         placeholder="Your Email"
                         value={formData.attendee_email}
                         onChange={handleChange}
-                        className="form-control"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
                         required
                         disabled={isSubmitting}
                     />
-                </div>
-                <div className="mb-3">
                     <input
                         type="tel"
                         name="attendee_phone"
                         placeholder="Phone Number"
                         value={formData.attendee_phone}
                         onChange={handleChange}
-                        className="form-control"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
                         required
                         disabled={isSubmitting}
                     />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="number_of_tickets" className="form-label">
-                        Number of Tickets
-                    </label>
-                    <input
-                        type="number"
-                        name="number_of_tickets"
-                        placeholder="Number of Tickets"
-                        value={formData.number_of_tickets}
-                        onChange={handleChange}
-                        className="form-control"
-                        required
-                        min="1"
-                        max={event?.available_tickets || 1}
-                        disabled={isSubmitting}
-                    />
-                </div>
-                <button
-                    type="submit"
-                    className="btn btn-primary"
-                    disabled={isSubmitting || !event?.available_tickets}
-                >
-                    {isSubmitting ? 'Processing...' : 'Confirm Booking'}
-                </button>
-            </form>
+                    <div>
+                        <label htmlFor="number_of_tickets" className="text-white mt-4 mb-5 block label-spacing">
+                            Number of Tickets
+                        </label>
+                        <input
+                            type="number"
+                            name="number_of_tickets"
+                            placeholder="Number of Tickets"
+                            value={formData.number_of_tickets}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                            required
+                            min="1"
+                            max={event?.available_tickets || 1}
+                            disabled={isSubmitting}
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transition-all duration-200 shadow-lg hover:shadow-xl"
+                        disabled={isSubmitting || !event?.available_tickets}
+                    >
+                        {isSubmitting ? 'Processing...' : 'Confirm Booking'}
+                    </button>
+                </form>
+                {error && (
+                    <div className="mt-4 bg-red-600 text-white p-4 rounded-lg">
+                        <p>{error}</p>
+                        <button onClick={() => setError(null)} className="mt-2 underline">
+                            Try Again
+                        </button>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
