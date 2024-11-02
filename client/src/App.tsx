@@ -60,7 +60,7 @@ function App() {
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch('${process.env.REACT_APP_API_URL}/api/events');
+      const response = await fetch(process.env.REACT_APP_API_URL + '/api/events');
       if (response.ok) {
         const data = await response.json();
         setEvents(data);
