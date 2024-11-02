@@ -5,7 +5,6 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 const app = express();
 
-const app = express();
 app.use(cors());
 
 const __filename = fileURLToPath(import.meta.url);
