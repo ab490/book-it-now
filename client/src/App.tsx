@@ -58,11 +58,9 @@ function App() {
     setIsSignup((prev) => !prev);
   };
 
-  const uri = process.env.REACT_APP_API_URL;
-
   const fetchEvents = async () => {
     try {
-      const response = await fetch(`${uri}/api/events`);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/events`);
       if (response.ok) {
         const data = await response.json();
         setEvents(data);

@@ -9,12 +9,10 @@ function Login({ onLogin }: LoginProps) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const uri = process.env.REACT_APP_API_URL;
-
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await fetch(`${uri}/api/users/login`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -53,10 +53,8 @@ function CreateEvent() {
 
     console.log("Submitting event data:", eventData);
 
-    const uri = process.env.REACT_APP_API_URL;
-
     try {
-      const response = await fetch(`${uri}/api/events`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/events`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
