@@ -91,7 +91,7 @@ function BookTicket() {
                 total_price: totalPrice
             };
 
-            const response = await fetch('http://localhost:5000/api/tickets', {
+            const response = await fetch('https://book-it-now-backend.onrender.com/api/tickets', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
