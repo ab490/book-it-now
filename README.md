@@ -1,26 +1,38 @@
-# book-it-now
-ADT Project
+# Book It Now! - Event Booking System
 
-Events booking project web application supporting 2 functionalities:
-(i) Organizers: can list and create events
-(ii) Attendees: can book tickets for events
+An event booking web application built to simplify the process of event creation and ticket booking. This application supports 2 types of users:
+- **Organizers**: Allows event organizers to list and create events.
+- **Users**: Users can browse and book tickets for their desired events.
 
-To setup the project in your local pc:
+## Accessing the Website
 
-1. clone the repo 
+You can access the web application using the following link:
 
-2. install backend dependencies<br>
-cd server<br>
-npm install
+[BookItNow](https://book-it-now.onrender.com/)
 
-3. install frontend dependencies<br>
-cd client<br>
-npm install
+## Features
 
-4. start backend<br>
-cd server<br>
-node server.js
+- **Event Creation**: Organizers can create events, specify ticket types, prices, availability, and event details.
+- **Ticket Booking**: Users can browse events, select tickets, and complete bookings with ease.
+- **User-Friendly Interface**: A simple, intuitive interface for both organizers and attendees.
 
-5. start frontend<br>
-cd client<br>
-npm run dev
+## Tech Stack
+
+- **Frontend**: React.js
+- **Backend**: Node.js
+- **Database**: MongoDB
+- **Deployment**: Hosted on Render
+
+## Usage
+
+Signup/Login as either organizer or attendee
+
+- **Organizers**:
+  1. Click on Register Event.
+  2. Fill in the event details, including name, location, date, ticket type, and price.
+  3. Submit to list the event for attendees to book.
+
+- **Attendees**:
+  1. Browse events on the main page.
+  2. Click on Book Ticket and choose the ticket type.
+  3. Complete the booking process to reserve your spot.
