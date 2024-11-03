@@ -2,7 +2,7 @@
 
 An event booking web application built to simplify the process of event creation and ticket booking. This application supports 2 types of users:
 - **Organizers**: Allows event organizers to list and create events.
-- **Users**: Users can browse and book tickets for their desired events.
+- **Attendees**: Attendees can browse and book tickets for their desired events.
 
 ## Accessing the Website
 
