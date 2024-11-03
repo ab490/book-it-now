@@ -14,7 +14,7 @@ function Signup({ onLogin }: SignupProps) {
     const [userType, setUserType] = useState<'organizer' | 'attendee'>('attendee');
 
 //    const uri = `${process.env.REACT_APP_API_URL}/api/users/signup`;
-    const uri = `https://book-it-now-backend.onrender.com//api/users/signup`;
+    const uri = `https://book-it-now-backend.onrender.com/api/users/signup`;
 
     const handleSignup = async (e: React.FormEvent) => {
         e.preventDefault();
