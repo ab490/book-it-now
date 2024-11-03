@@ -13,6 +13,8 @@ function Signup({ onLogin }: SignupProps) {
     const [phone, setPhone] = useState('');
     const [userType, setUserType] = useState<'organizer' | 'attendee'>('attendee');
 
+    const uri = `${process.env.REACT_APP_API_URL}/api/users/signup`;
+
     const handleSignup = async (e: React.FormEvent) => {
         e.preventDefault();
         const signupData = {
@@ -25,13 +27,16 @@ function Signup({ onLogin }: SignupProps) {
         };
 
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/signup`, {
+            const response = await fetch(uri, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(signupData),
             });
+
+	    console.log('Environment Variable:', process.env.REACT_APP_API_URL);
+	    console.log('Full URL /api/users/signup:', uri);
 
             if (response.ok) {
                 const data = await response.json();

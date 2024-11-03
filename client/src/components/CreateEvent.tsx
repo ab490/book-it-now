@@ -51,10 +51,11 @@ function CreateEvent() {
     e.preventDefault();
     setLoading(true);
 
-    console.log("Submitting event data:", eventData);
+    console.log("Submitting event data:", eventData); 
 
+    const uri = `${process.env.REACT_APP_API_URL}/api/events`;
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/events`, {
+      const response = await fetch(uri, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,6 +64,8 @@ function CreateEvent() {
         body: JSON.stringify(eventData),
       });
 
+      console.log('Environment Variable:', process.env.REACT_APP_API_URL);
+      console.log('Full URL /api/events component:', uri);
       if (!response.ok) {
         throw new Error(await response.text());
       }

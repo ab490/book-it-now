@@ -37,10 +37,13 @@ function BookTicket() {
         payment_status: 'pending',
     });
 
+    const uri = `${process.env.REACT_APP_API_URL}/api/events/${eventId}`;
     useEffect(() => {
         async function fetchEvent() {
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/events/${eventId}`);
+                const response = await fetch(uri);
+	        console.log('Environment Variable:', process.env.REACT_APP_API_URL);
+	        console.log('Full URL /api/events/${eventId}:', uri);
                 if (!response.ok) {
                     throw new Error(`Failed to fetch event: ${response.statusText}`);
                 }

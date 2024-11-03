@@ -8,11 +8,12 @@ interface LoginProps {
 function Login({ onLogin }: LoginProps) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    
+    const uri = `${process.env.REACT_APP_API_URL}/api/users/login`;
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/login`, {
+            const response = await fetch(uri, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -20,6 +21,8 @@ function Login({ onLogin }: LoginProps) {
                 body: JSON.stringify({ email, password }),
             });
 
+	    console.log('Environment Variable:', process.env.REACT_APP_API_URL);
+	    console.log('Full URL /api/users/login:', uri);
             if (response.ok) {
                 const data = await response.json();
                 console.log('User logged in:', data);
