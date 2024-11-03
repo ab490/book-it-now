@@ -58,7 +58,8 @@ function App() {
     setIsSignup((prev) => !prev);
   };
 
-  const uri = `${process.env.REACT_APP_API_URL}/api/events`;
+//  const uri = `${process.env.REACT_APP_API_URL}/api/events`;
+  const uri = `https://book-it-now-backend.onrender.com/api/events`;
 
   const fetchEvents = async () => {
     try {

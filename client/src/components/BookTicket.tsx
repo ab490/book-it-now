@@ -37,7 +37,9 @@ function BookTicket() {
         payment_status: 'pending',
     });
 
-    const uri = `${process.env.REACT_APP_API_URL}/api/events/${eventId}`;
+//    const uri = `${process.env.REACT_APP_API_URL}/api/events/${eventId}`;
+    const uri = `https://book-it-now-backend.onrender.com/api/events/${eventId}`;
+
     useEffect(() => {
         async function fetchEvent() {
             try {

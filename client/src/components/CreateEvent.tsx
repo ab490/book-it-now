@@ -53,7 +53,8 @@ function CreateEvent() {
 
     console.log("Submitting event data:", eventData); 
 
-    const uri = `${process.env.REACT_APP_API_URL}/api/events`;
+//    const uri = `${process.env.REACT_APP_API_URL}/api/events`;
+    const uri = `https://book-it-now-backend.onrender.com/api/events`;
     try {
       const response = await fetch(uri, {
         method: 'POST',
