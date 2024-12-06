@@ -1,13 +1,13 @@
 # Book It Now! - Event Booking System
 
 
-An event booking web application built to simplify the process of event creation and ticket booking. This application supports 2 types of users:
+An event booking web application built to simplify the process of event creation and ticket booking. This application supports 2 types of user groups:
 - **Organizers**: Allows event organizers to list and create events.
 - **Attendees**: Attendees can browse and book tickets for their desired events.
 
 ## Accessing the Website
 
-You can access the web application using the following link:
+You can access the web application using the following link
 
 [BookItNow](https://book-it-now.onrender.com/)
 
