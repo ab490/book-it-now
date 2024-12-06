@@ -26,7 +26,7 @@ You can access the web application using the following link:
 
 ## Usage
 
-Signup/Login as either organizer or attendee
+Users can Signup/Login as either organizer or attendee
 
 - **Organizers**:
   1. Click on Register Event.
