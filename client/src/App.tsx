@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import Signup from './components/Signup';
 import Login from './components/Login';
-import { useNavigate, useLocation } from 'react-router-dom';
+import Dashboard from './components/Dashboard';
+import { useNavigate, useLocation, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -58,7 +59,7 @@ function App() {
     setIsSignup((prev) => !prev);
   };
 
-//  const uri = `${process.env.REACT_APP_API_URL}/api/events`;
+  //  const uri = `${process.env.REACT_APP_API_URL}/api/events`;
   const uri = `https://book-it-now-backend.onrender.com/api/events`;
 
   const fetchEvents = async () => {
@@ -129,100 +130,126 @@ function App() {
 
   return (
     <div className="App">
-      <div className="position-relative mb-4">
-        <h1 className="text-center">Welcome {userType.charAt(0).toUpperCase() + userType.slice(1)} {user?.firstName ? user.firstName : (userType === 'organizer' ? 'Organizer' : 'Attendee')}</h1>
-        <button
-          className="btn btn-danger btn-sm position-absolute"
-          onClick={handleLogout}
-          style={{
-            top: '10px',
-            right: '10px',
-            padding: '0.25rem 0.5rem',
-            fontSize: '0.875rem'
-          }}
-        >
-          Logout
-        </button>
-      </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div>
+              <div className="position-relative mb-4">
+                <h1 className="text-center">Welcome {userType.charAt(0).toUpperCase() + userType.slice(1)} {user?.firstName ? user.firstName : (userType === 'organizer' ? 'Organizer' : 'Attendee')}</h1>
+                <button
+                  className="btn btn-danger btn-sm position-absolute"
+                  onClick={handleLogout}
+                  style={{
+                    top: '10px',
+                    right: '10px',
+                    padding: '0.25rem 0.5rem',
+                    fontSize: '0.875rem'
+                  }}
+                >
+                  Logout
+                </button>
+              </div>
 
-      {userType === 'organizer' && (
-        <>
-          <button
-            className="btn btn-primary mb-3"
-            onClick={() => navigate('/register-event')}
-          >
-            Register Event
-          </button>
-        </>
-      )}
+              {userType === 'organizer' && (
+                <>
+                  <button
+                    className="btn btn-primary mb-3"
+                    onClick={() => navigate('/register-event')}
+                  >
+                    Register Event
+                  </button>
+                  <button
+                    className="btn btn-info mb-3"
+                    onClick={() => navigate('/dashboard')}
+                  >
+                    View Analytics Dashboard
+                  </button>
+                </>
+              )}
 
-      <h2 style={{ marginTop: '0.1em' }}>Events</h2>
-      <table className="table table-bordered">
-        <thead>
-          <tr>
-            <th>Event Name</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-            <th>Location</th>
-            <th>Ticket Type</th>
-            <th>Ticket Price</th>
-            <th>Available Tickets</th>
-            <th>Organizer Name</th>
-            <th>Organizer Email</th>
-            {userType === 'attendee' && <th>Action</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {events.length > 0 ? (
-            currentEvents.map((event) => (
-              <tr key={event._id}>
-                <td>{event.event_name}</td>
-                <td>{event.description}</td>
-                <td>{event.date}</td>
-                <td>{event.start_time}</td>
-                <td>{event.end_time}</td>
-                <td>{event.location}</td>
-                <td>{event.ticket_type}</td>
-                <td>{event.ticket_price}</td>
-                <td>{event.available_tickets}</td>
-                <td>{event.organizer_name}</td>
-                <td>{event.organizer_email}</td>
-                {userType === 'attendee' && (
-                  <td>
-                    <button
-                      className={`btn ${event.available_tickets === 0 ? 'btn-secondary' : 'btn-success'}`}
-                      disabled={event.available_tickets === 0}
-                      onClick={() => navigate(`/book-ticket/${event._id}`)}
-                    >
-                      {event.available_tickets === 0 ? 'Sold Out' : 'Book Ticket'}
-                    </button>
-                  </td>
-                )}
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan={10} className="text-center">
-                No events available
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+              {userType === 'attendee' && (
+                <button
+                  className="btn btn-info mb-3"
+                  onClick={() => navigate('/dashboard')}
+                >
+                  View Analytics Dashboard
+                </button>
+              )}
 
-      <nav>
-        <ul className="pagination">
-          {Array.from({ length: Math.ceil(events.length / eventsPerPage) }).map((_, index) => (
-            <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
-              <button onClick={() => paginate(index + 1)} className="page-link">
-                {index + 1}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </nav>
+
+              <h2 style={{ marginTop: '0.1em' }}>Events</h2>
+              <table className="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Event Name</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Location</th>
+                    <th>Ticket Type</th>
+                    <th>Ticket Price</th>
+                    <th>Available Tickets</th>
+                    <th>Organizer Name</th>
+                    <th>Organizer Email</th>
+                    {userType === 'attendee' && <th>Action</th>}
+                  </tr>
+                </thead>
+                <tbody>
+                  {events.length > 0 ? (
+                    currentEvents.map((event) => (
+                      <tr key={event._id}>
+                        <td>{event.event_name}</td>
+                        <td>{event.description}</td>
+                        <td>{event.date}</td>
+                        <td>{event.start_time}</td>
+                        <td>{event.end_time}</td>
+                        <td>{event.location}</td>
+                        <td>{event.ticket_type}</td>
+                        <td>{event.ticket_price}</td>
+                        <td>{event.available_tickets}</td>
+                        <td>{event.organizer_name}</td>
+                        <td>{event.organizer_email}</td>
+                        {userType === 'attendee' && (
+                          <td>
+                            <button
+                              className={`btn ${event.available_tickets === 0 ? 'btn-secondary' : 'btn-success'}`}
+                              disabled={event.available_tickets === 0}
+                              onClick={() => navigate(`/book-ticket/${event._id}`)}
+                            >
+                              {event.available_tickets === 0 ? 'Sold Out' : 'Book Ticket'}
+                            </button>
+                          </td>
+                        )}
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={10} className="text-center">
+                        No events available
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+
+              <nav>
+                <ul className="pagination">
+                  {Array.from({ length: Math.ceil(events.length / eventsPerPage) }).map((_, index) => (
+                    <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
+                      <button onClick={() => paginate(index + 1)} className="page-link">
+                        {index + 1}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div >
+          }
+        />
+        < Route path="/dashboard" element={< Dashboard />} />
+      </Routes >
     </div >
   );
 }
