@@ -5,6 +5,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import CreateEvent from './components/CreateEvent';
 import BookTicket from './components/BookTicket';
+import Dashboard from './components/Dashboard';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css'
 
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/" element={<App />} />
         <Route path="/register-event" element={<CreateEvent />} /> {/* Route for Organizers - Event Registration */}
         <Route path="/book-ticket/:eventId" element={<BookTicket />} /> {/* Route for Attendees - Booking Tickets */}
+        <Route path="/dashboard" element={<Dashboard />} /> {/* Route for Dashboard */}
       </Routes>
     </Router>
   </StrictMode>

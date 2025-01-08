@@ -13,7 +13,7 @@ function Signup({ onLogin }: SignupProps) {
     const [phone, setPhone] = useState('');
     const [userType, setUserType] = useState<'organizer' | 'attendee'>('attendee');
 
-//    const uri = `${process.env.REACT_APP_API_URL}/api/users/signup`;
+    //    const uri = `${process.env.REACT_APP_API_URL}/api/users/signup`;
     const uri = `https://book-it-now-backend.onrender.com/api/users/signup`;
 
     const handleSignup = async (e: React.FormEvent) => {
@@ -36,8 +36,8 @@ function Signup({ onLogin }: SignupProps) {
                 body: JSON.stringify(signupData),
             });
 
-	    console.log('Environment Variable:', process.env.REACT_APP_API_URL);
-	    console.log('Full URL /api/users/signup:', uri);
+            console.log('Environment Variable:', process.env.REACT_APP_API_URL);
+            console.log('Full URL /api/users/signup:', uri);
 
             if (response.ok) {
                 const data = await response.json();

@@ -8,8 +8,8 @@ interface LoginProps {
 function Login({ onLogin }: LoginProps) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    
-//    const uri = `${process.env.REACT_APP_API_URL}/api/users/login`;
+
+    //    const uri = `${process.env.REACT_APP_API_URL}/api/users/login`;
     const uri = `https://book-it-now-backend.onrender.com/api/users/login`;
 
     const handleLogin = async (e: React.FormEvent) => {
@@ -23,8 +23,8 @@ function Login({ onLogin }: LoginProps) {
                 body: JSON.stringify({ email, password }),
             });
 
-	    console.log('Environment Variable:', process.env.REACT_APP_API_URL);
-	    console.log('Full URL /api/users/login:', uri);
+            console.log('Environment Variable:', process.env.REACT_APP_API_URL);
+            console.log('Full URL /api/users/login:', uri);
             if (response.ok) {
                 const data = await response.json();
                 console.log('User logged in:', data);
