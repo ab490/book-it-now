@@ -1,6 +1,7 @@
 const Dashboard = () => {
     return (
         <div style={{ width: '100%', height: '800px' }}>
+            <h1>Visualizations Dashboard</h1>
             <iframe
                 title="Power BI Dashboard"
                 width="100%"
