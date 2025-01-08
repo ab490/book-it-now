@@ -137,6 +137,14 @@ function App() {
             <div>
               <div className="position-relative mb-4">
                 <h1 className="text-center">Welcome {userType.charAt(0).toUpperCase() + userType.slice(1)} {user?.firstName ? user.firstName : (userType === 'organizer' ? 'Organizer' : 'Attendee')}</h1>
+
+                <button
+                  className="btn btn-primary mb-3"
+                  onClick={() => navigate('/dashboard')}
+                >
+                  View Analytics Dashboard
+                </button>
+
                 <button
                   className="btn btn-danger btn-sm position-absolute"
                   onClick={handleLogout}
@@ -159,24 +167,8 @@ function App() {
                   >
                     Register Event
                   </button>
-                  <button
-                    className="btn btn-info mb-3"
-                    onClick={() => navigate('/dashboard')}
-                  >
-                    View Analytics Dashboard
-                  </button>
                 </>
               )}
-
-              {userType === 'attendee' && (
-                <button
-                  className="btn btn-info mb-3"
-                  onClick={() => navigate('/dashboard')}
-                >
-                  View Analytics Dashboard
-                </button>
-              )}
-
 
               <h2 style={{ marginTop: '0.1em' }}>Events</h2>
               <table className="table table-bordered">
